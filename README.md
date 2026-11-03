@@ -2,8 +2,7 @@
 
 **Estudiante:** Fabricio De Souza  
 **Facultad:** Ciencias Empresariales y Economía (FCEE) — Universidad de Montevideo  
-**Curso:** Introducción a la Ciencia de Datos (Segundo semestre, 2026)  
-**Docente lector:** Cátedra de Introducción a la Ciencia de Datos  
+**Docente:** Joselina Beatriz DAVYT COLO
 
 ---
 
