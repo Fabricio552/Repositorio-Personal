@@ -1,7 +1,5 @@
-# =============================================================================
+
 # Script de instalación de paquetes necesarios en R
-# Curso: Introducción a la Ciencia de Datos (FCEE - Universidad de Montevideo)
-# =============================================================================
 
 paquetes_necesarios <- c("dplyr", "readr", "lubridate", "ggplot2", "patchwork")
 
