@@ -1,3 +1,21 @@
+# =============================================================================
+# Gitignore - Repositorio Personal - Introducción a la Ciencia de Datos
+# =============================================================================
+
+# --- Conjuntos de datos grandes (pesados o no versionables) ---
+# Nota del curso: Los datos crudos grandes no se versionan en Git.
+Bitacora/Data/*.csv
+Bitacora/Data/*.xlsx
+Bitacora/Data/*.zip
+Bitacora/Data/*.tar.gz
+Bitacora/Data/*.parquet
+
+# Excepciones: datasets livianos de ejemplo utilizados en clases
+!Bitacora/Data/12561_tasa_de_empleo_segun_nivel_educativo-_total_pais.csv
+!Bitacora/Data/Trabajos_Objetos.xlsx
+!Bitacora/Data/transito_aire_junio2024.csv
+
+# Reglas explícitas históricas
 Bitacora/Data/autoscope_04_2024_volumen.csv
 Bitacora/Data/autoscope_06_2024_volumen.csv
 Bitacora/Data/cantidad_de_residuos_en_la_estacion_de_transferencia_2023.csv
@@ -7,3 +25,60 @@ Bitacora/Data/o3_01_2024_04_2024.csv
 Bitacora/Data/ozono_2024_limpio.csv
 Bitacora/Data/pm_2_5_05_2024_08_2024.csv
 Bitacora/Data/Tabla simulada de respuestas.csv
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+.venv/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# --- Jupyter Notebooks ---
+.ipynb_checkpoints/
+*-checkpoint.ipynb
+
+# --- R ---
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user/
+
+# --- Salidas generadas temporales ---
+salidas/
+tmp/
+temp/
+
+# --- Editores y Sistema Operativo ---
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# --- Secretos y variables de entorno ---
+.env
+.env.*
+*.secret
+credentials.json

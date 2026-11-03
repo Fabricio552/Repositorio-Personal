@@ -1,0 +1,14 @@
+# Dependencias del Repositorio Personal - Introducción a la Ciencia de Datos (FCEE - UM)
+# Python 3.10+ compatible (se recomienda Python 3.11)
+
+pandas>=2.0.0
+numpy>=1.24.0
+matplotlib>=3.7.0
+openpyxl>=3.1.0
+scipy>=1.10.0
+statsmodels>=0.14.0
+
+# Opcionales para visualización geográfica y mapas de estaciones
+# geopandas>=0.13.0
+# folium>=0.14.0
+

@@ -1,28 +1,40 @@
 from pathlib import Path
 import pandas as pd
 
-# 1. Definir la ruta raíz del proyecto o del directorio de trabajo actual
-BASE_DIR = Path.cwd()
+# 1. Definir la ruta raíz del proyecto de forma dinámica y portable
+try:
+    BASE_DIR = Path(__file__).resolve().parents[2]
+except NameError:
+    BASE_DIR = Path.cwd().resolve()
 
-# 2. Construir las rutas de forma segura para ambos archivos
+candidatos_data = [
+    BASE_DIR / "Bitacora" / "Data",
+    BASE_DIR / "Repositorio-Personal" / "Bitacora" / "Data",
+    Path.cwd() / "Bitacora" / "Data",
+    Path.cwd() / "Data",
+]
+DATA_DIR = next((p for p in candidatos_data if p.exists()), BASE_DIR / "Bitacora" / "Data")
+
+# 2. Localizar archivos de forma tolerante a problemas de codificación en el nombre
 archivo_respuestas = "Tabla simulada de respuestas.csv"
-archivo_codigos = "libro de código.csv"
+ruta_respuestas = DATA_DIR / archivo_respuestas
 
-ruta_respuestas = BASE_DIR / "Repositorio-Personal" / "Bitacora" / "Data" / archivo_respuestas
-ruta_codigos = BASE_DIR / "Repositorio-Personal" / "Bitacora" / "Data" / archivo_codigos
+# Búsqueda tolerante para libro de códigos
+candidatos_codigos = list(DATA_DIR.glob("*libro*"))
+if candidatos_codigos:
+    ruta_codigos = candidatos_codigos[0]
+else:
+    ruta_codigos = DATA_DIR / "libro de código.csv"
 
-# 3. Verificar que los archivos realmente existen antes de cargarlos
+# 3. Verificar que los archivos existen antes de cargarlos
 if not ruta_respuestas.exists():
-    raise FileNotFoundError(f"No se encontró el archivo en: {ruta_respuestas}")
+    raise FileNotFoundError(f"No se encontró el archivo de respuestas en: {ruta_respuestas}")
 if not ruta_codigos.exists():
-    raise FileNotFoundError(f"No se encontró el archivo en: {ruta_codigos}")
+    raise FileNotFoundError(f"No se encontró el archivo de códigos en: {ruta_codigos}")
 
 # 4. Cargar los archivos CSV
-# Nota: Si te da error de lectura por los acentos, cambia encoding='utf-8' a encoding='latin1'
-# Si los datos aparecen en una sola columna, cambia sep=',' por sep=';'
-
-df_respuestas = pd.read_csv(ruta_respuestas, encoding='latin1', sep=';')
-df_codigos = pd.read_csv(ruta_codigos, encoding='latin1', sep=';')
+df_respuestas = pd.read_csv(ruta_respuestas, encoding="latin1", sep=";")
+df_codigos = pd.read_csv(ruta_codigos, encoding="latin1", sep=";")
 
 # 5. Inspección inicial de la tabla de respuestas
 print(f"--- Archivo cargado exitosamente: {ruta_respuestas.name} ---")
@@ -34,13 +46,10 @@ print(df_respuestas.head())
 print("\nDimensiones de la tabla de respuestas:", df_respuestas.shape)
 
 # 5.2. Filas únicas: detectando la columna que contiene el ID
-# En este caso, asumimos que la columna se llama 'id'
-if 'id' in df_respuestas.columns:
-    duplicados_id = df_respuestas.duplicated(subset=['id']).sum()
+if "id" in df_respuestas.columns:
+    duplicados_id = df_respuestas.duplicated(subset=["id"]).sum()
     print(f"\nFilas duplicadas usando 'id': {duplicados_id}")
-    
-    # Validar si el id es realmente único
-    if df_respuestas['id'].nunique() == len(df_respuestas):
+    if df_respuestas["id"].nunique() == len(df_respuestas):
         print("La columna 'id' funciona correctamente como identificador único.")
 else:
     print("\nAdvertencia: No se encontró la columna 'id' en el DataFrame.")
@@ -58,6 +67,6 @@ print((df_respuestas == "").sum())
 ## 5.4 Duplicados generales
 print(f"\nCantidad de filas exactamente iguales en todas sus columnas: {df_respuestas.duplicated().sum()}")
 
-# Opcional: Echar un vistazo rápido al libro de códigos
+# 5.5 Libro de códigos
 print("\n--- Libro de Códigos ---")
 print(df_codigos.head())
