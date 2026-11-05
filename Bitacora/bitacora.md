@@ -88,3 +88,11 @@ Registro semanal de lo que fui trabajando en el curso, los problemas que me enco
 - **Qué intenté:** Hacer una pasada general por todo el repositorio para verificar que cualquier persona pueda clonarlo y correr los scripts sin que se le rompa nada.
 - **Qué falló:** Me di cuenta de que si corría los scripts desde otra carpeta me saltaba `FileNotFoundError` porque había usado `Path.cwd() / "Repositorio-Personal/..."` hardcodeado.
 - **Qué decidí:** Corregir las rutas en todos los archivos de Python usando `Path(__file__).resolve()`, armar un `requirements.txt` con las librerías necesarias y dejar la bitácora ordenada con las recetas y errores que me fueron pasando.
+
+---
+
+## Semana 13 — 03/11 al 07/11: Revisión por pares del proyecto "datos-espaciales"
+- **Qué intenté:** Clonar y auditar el repositorio del equipo asignado (`datos-espaciales`) para evaluar su reproducibilidad y darles una devolución técnica y metodológica según la consigna de la clase.
+- **Qué falló:** El repo tenía salidas pesadas versionadas (HTML de 38 MB y GeoPackage de 5 MB), carpetas desordenadas con duplicados y un `requirements.txt` vacío. En lo metodológico, el script definía la necesidad de transporte usando solo edades <14 y >80 (dependencia demográfica), omitiendo a estudiantes y trabajadores sin auto, que son los usuarios cautivos reales del ómnibus.
+- **Qué decidí:** Armarles un feedback constructivo sugiriendo regenerar salidas por script usando `.gitignore`, ordenar la estructura de carpetas y corregir el supuesto conceptual del índice de transporte; y registrar la revisión en mi bitácora como aprendizaje de auditoría de código.
+
